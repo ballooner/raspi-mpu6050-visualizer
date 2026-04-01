@@ -3,7 +3,7 @@ import sys
 def main():
     # Make sure file argument is provided
     if (len(sys.argv) < 2):
-        print("File not provided")
+        print("File not provided!")
         return
 
 
