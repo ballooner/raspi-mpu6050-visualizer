@@ -2,7 +2,7 @@ from dash import Dash, html, dcc, callback, Output, Input
 import plotly.express as px
 import pandas as pd
 
-df = pd.read_csv(r"../data/gyroscope_data.csv")
+df = pd.read_csv(r"../data/Moving/filteredData.csv")
 
 app = Dash()
 
