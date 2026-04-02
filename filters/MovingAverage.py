@@ -24,7 +24,7 @@ def movingAverage(inputPath, outputPath):
     inputFile = open(inputPath, 'r')
     outputFile = open(outputPath, 'w')
 
-    outputFile.write(inputFile.readline()) # Write the input file header
+    outputFile.write(inputFile.readline()) # Write the input file header to output file
 
     valueQueues = [deque() for _ in range(3)] # Create an array to hold the deques for each sensor value
     total = [0 for _ in range(3)]             # Create array to hold the current total for each sensor value
