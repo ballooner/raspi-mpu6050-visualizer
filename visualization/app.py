@@ -9,6 +9,7 @@ app = Dash()
 app.layout = [
     html.H1(children='Gyrometer data', style={'textAlign':'center'}),
     dcc.Dropdown(os.listdir(DATA_DIR), "", id="data-folders"),
+    dcc.RadioItems(["Filtered", "Raw"], "Filtered", id="data-type"),
     dcc.Graph(id="gyro-x"),
     dcc.Graph(id="gyro-y"),
     dcc.Graph(id="gyro-z"),
@@ -19,12 +20,18 @@ app.layout = [
     Output("gyro-y", "figure"),
     Output("gyro-z", "figure"),
     Input("data-folders", "value"),
+    Input("data-type", "value"),
 )
-def updateGraphs(dataFolder):
+def updateGraphs(dataFolder, dataType):
     if (dataFolder == ""):
         return [px.line(), px.line(), px.line()]
 
-    dataFile = DATA_DIR / dataFolder / "rawData.csv"
+    dataFile = DATA_DIR / dataFolder
+    if (dataType == "Filtered"):
+        dataFile /= "filteredData.csv"
+    else:
+        dataFile /= "rawData.csv"
+
     data = pd.read_csv(dataFile)
 
     xFig = createFigure(data, "t", "x", "Gyro X Measurements")
